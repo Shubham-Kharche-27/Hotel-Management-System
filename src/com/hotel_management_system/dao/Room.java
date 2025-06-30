@@ -6,9 +6,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Scanner;
 
 public class Room {
-    public void roomDao(int room_number, String room_type , double price ,String status,int choice) throws ClassNotFoundException, SQLException {
+    public void roomDao(int room_number, String room_type , double price , String status, int choice, Scanner sc) throws ClassNotFoundException, SQLException {
         switch(choice){
             case 1:
                 DbConnection dbConnect = new DbConnection();
@@ -47,8 +48,34 @@ public class Room {
                         }
 
                     case 3:
-                        query = "INSERT INTO rooms SET room_number = ?,room_type = ?,price = ?,status = ? WHERE room_id =?";
+                        query = "UPDATE rooms SET room_number = ?,room_type = ?,price = ?,status = ? WHERE room_id =?";
+                        preparedStatement = connection.prepareStatement(query);
+                        preparedStatement.setInt(1,room_number);
+                        preparedStatement.setString(2,room_type);
+                        preparedStatement.setDouble(3,price);
+                        preparedStatement.setString(4,status);
+                        row = preparedStatement.executeUpdate();
+                        if(row>0){
+                            System.out.println("Room updated Successfully");
+                        }else{
+                            System.out.println("Room not updated.");
+                        }
 
+                    case 4:
+                        System.out.print("Enter the Room id::");
+                        int room_id = sc.nextInt();
+                        query = "DELETE room WHERE room_id = ?";
+                        preparedStatement = connection.prepareStatement(query);
+                        preparedStatement.setInt(1,room_id);
+                        row = preparedStatement.executeUpdate();
+                        if(row>0){
+                            System.out.println("Room was deleted.");
+                        }else{
+                            System.out.println("Room was not deleted.");
+                        }
+
+                    default:
+                        System.out.println("Enter the valid choice!");
                 }
         }
     }
