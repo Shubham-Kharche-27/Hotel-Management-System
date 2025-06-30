@@ -14,6 +14,7 @@ public class Guest {
         PreparedStatement preparedStatement;
         ResultSet resultSet;
         String query;
+        int row = 0;
         switch(choice){
             case 1:
                 query = "INSERT INTO guests(guest_id,name,phone,email) VALUES(?,?,?,?)";
@@ -22,13 +23,13 @@ public class Guest {
                 preparedStatement.setString(2,name);
                 preparedStatement.setString(3,phone);
                 preparedStatement.setString(4,email);
-                int row = preparedStatement.executeUpdate();
+                row = preparedStatement.executeUpdate();
                 Thread.sleep(2000);
                 if(row>0){
-                    System.out.println("Guest was Added Successfully");
+                    System.out.println("Guest was Added Successfully.");
                 }
                 else{
-                    System.out.println("Guest cannot added");
+                    System.out.println("Guest cannot added.");
                 }
 
             case 2:
@@ -41,7 +42,37 @@ public class Guest {
                     System.out.println("+----------+--------------+----------------------+----------------+");
                     System.out.printf("| %-8s | %-12s | %-20s | %-14s |\n", resultSet.getInt(guest_id), resultSet.getString(name), resultSet.getString(phone), resultSet.getString(email));
 
+                }else{
+                    System.out.println("Cannot able to fetch guest details.");
                 }
+
+            case 3:
+                query = "UPDATE guests SET name = ?, phone = ?, email = ? WHERE guest_id = ?";
+                preparedStatement = connection.prepareStatement(query);
+                preparedStatement.setString(1,name);
+                preparedStatement.setString(2,phone);
+                preparedStatement.setString(3,email);
+                preparedStatement.setInt(4,guest_id);
+                row = preparedStatement.executeUpdate();
+                if(row>0){
+                    System.out.println("Data updated successfully.");
+                }else{
+                    System.out.println("Data not updated.");
+                }
+
+            case 4:
+                query = "DELETE guests WHERE guest_id = ?";
+                preparedStatement = connection.prepareStatement(query);
+                preparedStatement.setInt(1,guest_id);
+                row = preparedStatement.executeUpdate();
+                if(row>0){
+                    System.out.println("Guest delete successfully.");
+                }else{
+                    System.out.println("Guest not deleted.");
+                }
+
+            default:
+                System.out.println("Enter the valid choice!");
         }
     }
 }
