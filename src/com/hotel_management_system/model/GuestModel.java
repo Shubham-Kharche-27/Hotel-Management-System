@@ -6,6 +6,10 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 public class GuestModel{
+    int guest_id;
+    String name;
+    String phone;
+    String email;
     public void Guest(Scanner sc) throws ClassNotFoundException, SQLException,InterruptedException {
 
         Guest guest = new Guest();
@@ -19,18 +23,39 @@ public class GuestModel{
         switch(choice){
             case 1:
                 System.out.print("Enter guest Id::");
-                int guest_id = sc.nextInt();
+                guest_id = sc.nextInt();
                 System.out.print("Enter guest name::");
-                String name = sc.nextLine();
+                name = sc.nextLine();
                 sc.next();
                 System.out.print("Enter guest phone::");
-                String phone = sc.nextLine();
+                phone = sc.nextLine();
+                sc.next();
                 System.out.print("Enter guest email::");
-                String email = sc.nextLine();
-                guest.GuestDao(guest_id,name,phone,email,choice);
+                email = sc.nextLine();
+                sc.next();
+                guest.GuestDaoCreate(guest_id,name,phone,email);
 
             case 2:
+                guest.GuestDaoRead();
 
+            case 3:
+                System.out.print("Enter guest Id::");
+                guest_id = sc.nextInt();
+                System.out.print("Enter guest name::");
+                name = sc.nextLine();
+                sc.next();
+                System.out.print("Enter guest phone::");
+                phone = sc.nextLine();
+                sc.next();
+                System.out.print("Enter guest email::");
+                email = sc.nextLine();
+                sc.next();
+                guest.GuestDaoUpdate(guest_id,name,phone,email);
+
+            case 4:
+                System.out.print("Enter guest Id::");
+                guest_id = sc.nextInt();
+                guest.GuestDaoDelete(guest_id);
         }
     }
 }
