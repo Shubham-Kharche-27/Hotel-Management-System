@@ -14,9 +14,9 @@ public class Guest {
         try {
             connection = dbConnect.dbConnection();
         } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
+            System.out.println(e.getMessage());
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println(e.getMessage());
         }
     }
     PreparedStatement preparedStatement;
@@ -57,29 +57,43 @@ public class Guest {
     }
 
     public void GuestDaoUpdate(int guest_id,String name,String phone,String email)throws SQLException,InterruptedException {
-        query = "UPDATE guests SET name = ?, phone = ?, email = ? WHERE guest_id = ?";
-        preparedStatement = connection.prepareStatement(query);
-        preparedStatement.setString(1,name);
-        preparedStatement.setString(2,phone);
-        preparedStatement.setString(3,email);
-        preparedStatement.setInt(4,guest_id);
-        row = preparedStatement.executeUpdate();
-        if(row>0){
+
+        if(findGuestId(guest_id)){
+            query = "UPDATE guests SET name = ?, phone = ?, email = ? WHERE guest_id = ?";
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1,name);
+            preparedStatement.setString(2,phone);
+            preparedStatement.setString(3,email);
+            preparedStatement.setInt(4,guest_id);
+            preparedStatement.executeUpdate();
             System.out.println("Data updated successfully.");
         }else{
-            System.out.println("Data not updated.");
+            System.out.println("Data not updated, cannot able to fetch guest.");
         }
     }
 
     public void GuestDaoDelete(int guest_id)throws SQLException,InterruptedException {
-            query = "DELETE guests WHERE guest_id = ?";
-            preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setInt(1,guest_id);
-            row = preparedStatement.executeUpdate();
-            if(row>0){
+            if(findGuestId(guest_id)){
+                query = "DELETE guests WHERE guest_id = ?";
+                preparedStatement = connection.prepareStatement(query);
+                preparedStatement.setInt(1,guest_id);
+                row = preparedStatement.executeUpdate();
                 System.out.println("Guest delete successfully.");
             }else{
                 System.out.println("Guest not deleted.");
             }
+    }
+
+    public boolean findGuestId(int guest_id) throws SQLException{
+
+
+        query = "SELECT guest_id FROM guests WHERE guest_id = ?";
+        preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setInt(1,guest_id);
+        resultSet = preparedStatement.executeQuery();
+        if(resultSet.next()){
+            return guest_id == resultSet.getInt("guest_id");
+        }
+        return false;
     }
 }
