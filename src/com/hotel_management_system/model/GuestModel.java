@@ -6,13 +6,15 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 public class GuestModel{
-    int guest_id;
-    String name;
-    String phone;
-    String email;
+
     public void Guest(Scanner sc) throws ClassNotFoundException, SQLException,InterruptedException {
 
         Guest guest = new Guest();
+
+        int guest_id;
+        String name;
+        String phone;
+        String email;
 
         System.out.println("1. Add new guest");
         System.out.println("2. View guest details");
