@@ -7,8 +7,8 @@ import java.util.Scanner;
 
 public class GuestModel{
 
-    public void guest(Scanner sc) throws ClassNotFoundException, SQLException,InterruptedException {
-
+    public void guest() throws ClassNotFoundException, SQLException,InterruptedException {
+        Scanner sc = new Scanner(System.in);
         Guest guest = new Guest();
 
         int guest_id;
