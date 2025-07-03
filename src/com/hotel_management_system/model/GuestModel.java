@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class GuestModel{
 
-    public void Guest(Scanner sc) throws ClassNotFoundException, SQLException,InterruptedException {
+    public void guest(Scanner sc) throws ClassNotFoundException, SQLException,InterruptedException {
 
         Guest guest = new Guest();
 
