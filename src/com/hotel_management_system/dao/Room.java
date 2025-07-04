@@ -6,18 +6,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Scanner;
 
 public class Room {
     DbConnection dbConnect = new DbConnection();
     Connection connection;
-    {
-        try{
-            connection = dbConnect.dbConnection();
-        }catch (ClassNotFoundException e) {
-            System.out.println(e.getMessage());
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
+
+    public Room() {
+        connection = dbConnect.dbConnection();
+        if (connection == null) {
+            throw new RuntimeException("Failed to establish database connection");
         }
     }
     PreparedStatement preparedStatement;
@@ -54,7 +51,7 @@ public class Room {
     }
 
     public void roomDaoUpdate(int room_id,int room_number, String room_type, double price, String status) throws SQLException {
-        query = "UPDATE rooms SET room_number = ?,room_type = ?,price = ?,status = ? WHERE room_id =?";
+        query = "UPDATE FROM rooms SET room_number = ?,room_type = ?,price = ?,status = ? WHERE room_id =?";
         preparedStatement = connection.prepareStatement(query);
         preparedStatement.setInt(1, room_number);
         preparedStatement.setString(2, room_type);
@@ -70,7 +67,7 @@ public class Room {
     }
 
     public void roomDaoDelete(int room_id) throws SQLException {
-        query = "DELETE room WHERE room_id = ?";
+        query = "DELETE FROM room WHERE room_id = ?";
         preparedStatement = connection.prepareStatement(query);
         preparedStatement.setInt(1, room_id);
         row = preparedStatement.executeUpdate();

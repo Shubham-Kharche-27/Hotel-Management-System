@@ -8,18 +8,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Guest {
-        DbConnection dbConnect= new DbConnection();
+
+        DbConnection dbConnect = new DbConnection();
         Connection connection;
-    {
-        try {
+
+        public Guest() {
             connection = dbConnect.dbConnection();
-        } catch (ClassNotFoundException e) {
-            System.out.println(e.getMessage());
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            if (connection == null) {
+                throw new RuntimeException("Failed to establish database connection");
+            }
         }
-    }
-    PreparedStatement preparedStatement;
+        PreparedStatement preparedStatement;
         ResultSet resultSet;
         String query;
         int row = 0;
@@ -41,7 +40,7 @@ public class Guest {
                 }
     }
 
-    public void GuestDaoRead() throws ClassNotFoundException, SQLException,InterruptedException {
+    public void GuestDaoRead() throws SQLException{
         query = "SELECT * FROM guests";
         preparedStatement = connection.prepareStatement(query);
         resultSet = preparedStatement.executeQuery();
@@ -56,10 +55,10 @@ public class Guest {
         }
     }
 
-    public void GuestDaoUpdate(int guest_id,String name,String phone,String email)throws SQLException,InterruptedException {
+    public void GuestDaoUpdate(int guest_id,String name,String phone,String email)throws SQLException{
 
         if(findGuestId(guest_id)){
-            query = "UPDATE guests SET name = ?, phone = ?, email = ? WHERE guest_id = ?";
+            query = "UPDATE FROM guests SET name = ?, phone = ?, email = ? WHERE guest_id = ?";
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1,name);
             preparedStatement.setString(2,phone);
@@ -72,9 +71,9 @@ public class Guest {
         }
     }
 
-    public void GuestDaoDelete(int guest_id)throws SQLException,InterruptedException {
+    public void GuestDaoDelete(int guest_id)throws SQLException{
             if(findGuestId(guest_id)){
-                query = "DELETE guests WHERE guest_id = ?";
+                query = "DELETE FROM guests WHERE guest_id = ?";
                 preparedStatement = connection.prepareStatement(query);
                 preparedStatement.setInt(1,guest_id);
                 row = preparedStatement.executeUpdate();

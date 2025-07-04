@@ -29,11 +29,7 @@ public class Main {
                 case 3:
                     bookingModel.booking();
             }
-        }catch (ClassNotFoundException e){
-            System.out.println(e.getMessage());
-        }catch (InterruptedException e){
-            System.out.println(e.getMessage());
-        }catch (SQLException e){
+        }catch (ClassNotFoundException | InterruptedException | SQLException e){
             System.out.println(e.getMessage());
         }
 

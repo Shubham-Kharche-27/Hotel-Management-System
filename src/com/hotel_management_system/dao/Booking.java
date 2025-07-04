@@ -2,32 +2,27 @@ package com.hotel_management_system.dao;
 
 import com.hotel_management_system.db.DbConnection;
 
-import javax.xml.transform.Result;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Scanner;
 
 public class Booking {
     DbConnection dbConnect = new DbConnection();
     Connection connection;
-    {
-        try{
-            Connection connection = dbConnect.dbConnection();
-        }catch(ClassNotFoundException e){
-            System.out.println(e.getMessage());
-        }catch(SQLException e){
-            System.out.println(e.getMessage());
+
+    public Booking() {
+        connection = dbConnect.dbConnection();
+        if (connection == null) {
+            throw new RuntimeException("Failed to establish database connection");
         }
     }
-
     PreparedStatement preparedStatement = null;
     ResultSet resultSet = null;
     String query;
     public void bookingDaoCreate(int guest_id, int room_id, String checkin_date,String checkout_date) throws SQLException {
         query = "INSERT INTO bookings(guest_id,room_id,checkin_date,checkout_date) VALUES(?,?,?,?)";
-        boolean isGuestIdAvailable = findGuestId(guest_id,connection,preparedStatement,query,resultSet);
+        boolean isGuestIdAvailable = findGuestId(guest_id,connection);
         if(isGuestIdAvailable){
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1,guest_id);
@@ -42,8 +37,8 @@ public class Booking {
     }
 
     public void bookingDaoCheckout(int booking_id) throws SQLException {
-        query = "DELETE bookings WHERE booking_id = ?";
-        boolean isBookingIdAvailabe = findBookingId(booking_id,connection,preparedStatement,query,resultSet);
+        query = "DELETE FROM bookings WHERE booking_id = ?";
+        boolean isBookingIdAvailabe = findBookingId(booking_id,connection);
         if(isBookingIdAvailabe){
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1,booking_id);
@@ -68,7 +63,7 @@ public class Booking {
         }
     }
 
-    public boolean findGuestId(int guest_id,Connection connection,PreparedStatement preparedStatement,String query,ResultSet resultSet) throws SQLException{
+    public boolean findGuestId(int guest_id,Connection connection) throws SQLException{
 
 
         query = "SELECT guest_id FROM guests WHERE guest_id = ?";
@@ -81,7 +76,7 @@ public class Booking {
         return false;
     }
 
-    public boolean findBookingId(int booking_id, Connection connection, PreparedStatement preparedStatement, String query, ResultSet resultSet) throws SQLException{
+    public boolean findBookingId(int booking_id, Connection connection) throws SQLException{
 
         query = "SELECT booking_id FROM bookings WHERE booking_id = ?";
         preparedStatement = connection.prepareStatement(query);
