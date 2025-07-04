@@ -40,10 +40,10 @@ public class Room {
         query = "SELECT * FROM rooms";
         preparedStatement = connection.prepareStatement(query);
         resultSet = preparedStatement.executeQuery();
+        System.out.println("+---------+-------------+------------+----------+----------+");
+        System.out.printf("| %-7s | %-11s | %-10s | %-8s | %-8s |\n",
+                "room_id", "room_number", "room_type", "price", "status");
         while (resultSet.next()) {
-            System.out.println("+---------+-------------+------------+----------+----------+");
-            System.out.printf("| %-7s | %-11s | %-10s | %-8s | %-8s |\n",
-                    "room_id", "room_number", "room_type", "price", "status");
             System.out.println("+---------+-------------+------------+----------+----------+");
             System.out.printf("| %-7d | %-11d | %-10s | %-8.2f | %-8s |\n", resultSet.getInt("room_id"), resultSet.getInt("room_number"), resultSet.getString("room_type"), resultSet.getDouble("price"), resultSet.getString("status"));
 
@@ -51,7 +51,7 @@ public class Room {
     }
 
     public void roomDaoUpdate(int room_id,int room_number, String room_type, double price, String status) throws SQLException {
-        query = "UPDATE FROM rooms SET room_number = ?,room_type = ?,price = ?,status = ? WHERE room_id =?";
+        query = "UPDATE rooms SET room_number = ?,room_type = ?,price = ?,status = ? WHERE room_id =?";
         preparedStatement = connection.prepareStatement(query);
         preparedStatement.setInt(1, room_number);
         preparedStatement.setString(2, room_type);
@@ -67,7 +67,7 @@ public class Room {
     }
 
     public void roomDaoDelete(int room_id) throws SQLException {
-        query = "DELETE FROM room WHERE room_id = ?";
+        query = "DELETE FROM rooms WHERE room_id = ?";
         preparedStatement = connection.prepareStatement(query);
         preparedStatement.setInt(1, room_id);
         row = preparedStatement.executeUpdate();

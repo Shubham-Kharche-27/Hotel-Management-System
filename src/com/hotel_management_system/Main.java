@@ -22,12 +22,18 @@ public class Main {
             switch(choice){
                 case 1:
                     guestModel.guest();
+                    break;
 
                 case 2:
                     roomModel.room();
+                    break;
 
                 case 3:
                     bookingModel.booking();
+                    break;
+
+                default:
+                    System.out.println("Enter the valid choice!");
             }
         }catch (ClassNotFoundException | InterruptedException | SQLException e){
             System.out.println(e.getMessage());

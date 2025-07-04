@@ -22,42 +22,40 @@ public class GuestModel{
         System.out.println("4. Delete guest");
         System.out.print("Enter the choice::");
         int choice = sc.nextInt();
+        sc.nextLine();
         switch(choice){
             case 1:
-                System.out.print("Enter guest Id::");
-                guest_id = sc.nextInt();
                 System.out.print("Enter guest name::");
                 name = sc.nextLine();
-                sc.next();
                 System.out.print("Enter guest phone::");
                 phone = sc.nextLine();
-                sc.next();
                 System.out.print("Enter guest email::");
                 email = sc.nextLine();
-                sc.next();
-                guest.GuestDaoCreate(guest_id,name,phone,email);
+                guest.GuestDaoCreate(name,phone,email);
+                break;
 
             case 2:
                 guest.GuestDaoRead();
+                break;
 
             case 3:
                 System.out.print("Enter guest Id::");
                 guest_id = sc.nextInt();
+                sc.nextLine();
                 System.out.print("Enter guest name::");
                 name = sc.nextLine();
-                sc.next();
                 System.out.print("Enter guest phone::");
                 phone = sc.nextLine();
-                sc.next();
                 System.out.print("Enter guest email::");
                 email = sc.nextLine();
-                sc.next();
                 guest.GuestDaoUpdate(guest_id,name,phone,email);
+                break;
 
             case 4:
                 System.out.print("Enter guest Id::");
                 guest_id = sc.nextInt();
                 guest.GuestDaoDelete(guest_id);
+                break;
         }
     }
 }

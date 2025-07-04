@@ -25,38 +25,42 @@ public class RoomModel {
             case 1:
                 System.out.print("Enter the room_number::");
                 room_number = sc.nextInt();
+                sc.nextLine();
                 System.out.print("Enter the room_type::");
                 room_type = sc.nextLine();
-                sc.next();
                 System.out.print("Enter the price::");
                 price = sc.nextDouble();
+                sc.nextLine();
                 System.out.print("Enter the status::");
                 status = sc.nextLine();
-                sc.next();
                 room.roomDaoCreate(room_number,room_type,price,status);
+                break;
 
             case 2:
                 room.roomDaoRead();
+                break;
 
             case 3:
                 System.out.print("Enter the room id::");
                 room_id = sc.nextInt();
                 System.out.print("Enter the room number::");
                 room_number = sc.nextInt();
+                sc.nextLine();
                 System.out.print("Enter the room type::");
                 room_type = sc.nextLine();
-                sc.next();
                 System.out.print("Enter the price::");
                 price = sc.nextDouble();
+                sc.nextLine();
                 System.out.print("Enter the status::");
                 status = sc.nextLine();
-                sc.next();
                 room.roomDaoUpdate(room_id,room_number,room_type,price,status);
+                break;
 
             case 4:
                 System.out.print("Enter the Room id::");
                 room_id = sc.nextInt();
                 room.roomDaoDelete(room_id);
+                break;
         }
         sc.close();
     }

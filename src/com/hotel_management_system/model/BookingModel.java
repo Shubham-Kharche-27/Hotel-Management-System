@@ -34,14 +34,17 @@ public class BookingModel {
                 checkout_date = sc.nextLine();
                 sc.next();
                 booking.bookingDaoCreate(guest_id,room_id,checkin_date,checkout_date);
+                break;
 
             case 2:
                 System.out.print("Enter the booking ID::");
                 booking_id = sc.nextInt();
                 booking.bookingDaoCheckout(booking_id);
+                break;
 
             case 3:
                 booking.bookingDaoRead();
+                break;
         }
     }
 }
