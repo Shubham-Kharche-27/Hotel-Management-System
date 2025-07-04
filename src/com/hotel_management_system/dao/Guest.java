@@ -22,7 +22,6 @@ public class Guest {
         ResultSet resultSet;
         String query;
         int row = 0;
-
     public void GuestDaoCreate(String name,String phone,String email) throws SQLException,InterruptedException {
                 query = "INSERT INTO guests(name,phone,email) VALUES(?,?,?)";
                 preparedStatement = connection.prepareStatement(query);
@@ -37,6 +36,8 @@ public class Guest {
                 else{
                     System.out.println("Guest cannot added.");
                 }
+                preparedStatement.close();
+                connection.close();
     }
 
     public void GuestDaoRead() throws SQLException{
@@ -45,9 +46,12 @@ public class Guest {
         resultSet = preparedStatement.executeQuery();
         System.out.println("+----------+--------------+----------------------+----------------+");
         System.out.printf("| %-8s | %-12s | %-20s | %-14s |\n", "guest_id", "name", "phone", "email");
+        System.out.println("+----------+--------------+----------------------+----------------+");
         while(resultSet.next()){
-            System.out.println("+----------+--------------+----------------------+----------------+");
             System.out.printf("| %-8s | %-12s | %-20s | %-14s |\n", resultSet.getInt("guest_id"), resultSet.getString("name"), resultSet.getString("phone"), resultSet.getString("email"));
+            System.out.println("+----------+--------------+----------------------+----------------+");
+            preparedStatement.close();
+            connection.close();
         }
     }
 
@@ -65,6 +69,8 @@ public class Guest {
         }else{
             System.out.println("Data not updated, cannot able to fetch guest.");
         }
+        preparedStatement.close();
+        connection.close();
     }
 
     public void GuestDaoDelete(int guest_id)throws SQLException{

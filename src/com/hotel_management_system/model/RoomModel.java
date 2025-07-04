@@ -19,6 +19,7 @@ public class RoomModel {
         System.out.println("2. View all rooms");
         System.out.println("3. Update room details");
         System.out.println("4. Delete room");
+        System.out.println("5. Back to main menu");
         System.out.print("Enter the choice::");
         int choice = sc.nextInt();
         switch(choice){
@@ -34,10 +35,12 @@ public class RoomModel {
                 System.out.print("Enter the status::");
                 status = sc.nextLine();
                 room.roomDaoCreate(room_number,room_type,price,status);
+                room();
                 break;
 
             case 2:
                 room.roomDaoRead();
+                room();
                 break;
 
             case 3:
@@ -54,13 +57,21 @@ public class RoomModel {
                 System.out.print("Enter the status::");
                 status = sc.nextLine();
                 room.roomDaoUpdate(room_id,room_number,room_type,price,status);
+                room();
                 break;
 
             case 4:
                 System.out.print("Enter the Room id::");
                 room_id = sc.nextInt();
                 room.roomDaoDelete(room_id);
+                room();
                 break;
+
+            case 5:
+                return;
+
+            default:
+                System.out.println("Enter the valid choice");
         }
         sc.close();
     }

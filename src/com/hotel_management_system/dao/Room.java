@@ -34,6 +34,8 @@ public class Room {
         } else {
             System.out.println("Room not added.");
         }
+        preparedStatement.close();
+        connection.close();
     }
 
     public void roomDaoRead() throws SQLException {
@@ -43,11 +45,14 @@ public class Room {
         System.out.println("+---------+-------------+------------+----------+----------+");
         System.out.printf("| %-7s | %-11s | %-10s | %-8s | %-8s |\n",
                 "room_id", "room_number", "room_type", "price", "status");
+        System.out.println("+---------+-------------+------------+----------+----------+");
         while (resultSet.next()) {
-            System.out.println("+---------+-------------+------------+----------+----------+");
             System.out.printf("| %-7d | %-11d | %-10s | %-8.2f | %-8s |\n", resultSet.getInt("room_id"), resultSet.getInt("room_number"), resultSet.getString("room_type"), resultSet.getDouble("price"), resultSet.getString("status"));
+            System.out.println("+---------+-------------+------------+----------+----------+");
 
         }
+        preparedStatement.close();
+        connection.close();
     }
 
     public void roomDaoUpdate(int room_id,int room_number, String room_type, double price, String status) throws SQLException {
@@ -64,6 +69,9 @@ public class Room {
         } else {
             System.out.println("Room not updated.");
         }
+        preparedStatement.close();
+        connection.close();
+
     }
 
     public void roomDaoDelete(int room_id) throws SQLException {
@@ -76,5 +84,7 @@ public class Room {
         } else {
             System.out.println("Room was not deleted.");
         }
+        preparedStatement.close();
+        connection.close();
     }
 }

@@ -18,6 +18,7 @@ public class BookingModel {
         System.out.println("1. Book room for guest");
         System.out.println("2. Checkout guest");
         System.out.println("3. View all booking");
+        System.out.println("4. Back to main menu");
         System.out.print("Enter the choice::");
         int choice = sc.nextInt();
 
@@ -27,24 +28,32 @@ public class BookingModel {
                 guest_id = sc.nextInt();
                 System.out.print("Enter the room id::");
                 room_id = sc.nextInt();
+                sc.nextLine();
                 System.out.print("Enter the guest checkin date::");
                 checkin_date = sc.nextLine();
-                sc.next();
                 System.out.print("Enter the guest checkout date::");
                 checkout_date = sc.nextLine();
-                sc.next();
                 booking.bookingDaoCreate(guest_id,room_id,checkin_date,checkout_date);
+                booking();
                 break;
 
             case 2:
                 System.out.print("Enter the booking ID::");
                 booking_id = sc.nextInt();
                 booking.bookingDaoCheckout(booking_id);
+                booking();
                 break;
 
             case 3:
                 booking.bookingDaoRead();
+                booking();
                 break;
+
+            case 4:
+                return;
+
+            default:
+                System.out.println("Enter the valid choice");
         }
     }
 }

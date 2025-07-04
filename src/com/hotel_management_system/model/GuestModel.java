@@ -1,5 +1,6 @@
 package com.hotel_management_system.model;
 
+import com.hotel_management_system.Main;
 import com.hotel_management_system.dao.Guest;
 
 import java.sql.SQLException;
@@ -20,6 +21,7 @@ public class GuestModel{
         System.out.println("2. View guest details");
         System.out.println("3. Update guest Information");
         System.out.println("4. Delete guest");
+        System.out.println("5. Back to main menu");
         System.out.print("Enter the choice::");
         int choice = sc.nextInt();
         sc.nextLine();
@@ -32,10 +34,12 @@ public class GuestModel{
                 System.out.print("Enter guest email::");
                 email = sc.nextLine();
                 guest.GuestDaoCreate(name,phone,email);
+                guest();
                 break;
 
             case 2:
                 guest.GuestDaoRead();
+                guest();
                 break;
 
             case 3:
@@ -49,13 +53,21 @@ public class GuestModel{
                 System.out.print("Enter guest email::");
                 email = sc.nextLine();
                 guest.GuestDaoUpdate(guest_id,name,phone,email);
+                guest();
                 break;
 
             case 4:
                 System.out.print("Enter guest Id::");
                 guest_id = sc.nextInt();
                 guest.GuestDaoDelete(guest_id);
+                guest();
                 break;
+
+            case 5:
+                return;
+
+            default:
+                System.out.println("Enter the valid choice.");
         }
     }
 }
