@@ -1,33 +1,108 @@
-# Hotel-Management-System
-A command-line Hotel Management System in Java using JDBC. Features guest, room, and booking management with CRUD operations. Connects to MySQL for data storage. Lightweight, modular, and ideal for learning Java with database integration.
+# 🏨 Hotel Management System (Java + JDBC + MySQL)
 
-#SQL Queries
+A **Command-Line Hotel Management System** built using **Java**, connected to a **MySQL database** via **JDBC**. This project provides basic **CRUD functionality** for managing guests, rooms, and bookings — ideal for learning how to integrate Java applications with relational databases.
 
--- Guest Table
-CREATE TABLE guests(
-guest_id INT PRIMARY KEY AUTO_INCREMENT,
-name VARCHAR(100),
-phone VARCHAR(15),
-email VARCHAR(20)
-);
+---
 
--- Room Table
-CREATE TABLE rooms(
-room_id INT PRIMARY KEY AUTO_INCREMENT,
-room_number INT,
-room_type VARCHAR(50),
-price DECIMAL(10,2),
-status VARCHAR(15)
-);
+## 📌 Features
 
--- Bookings Table
-CREATE TABLE bookings (
-    booking_id INT PRIMARY KEY AUTO_INCREMENT,
-    guest_id INT,
-    room_id INT,
-    checkin_date VARCHAR(20),
-    checkout_date VARCHAR(20),
-    FOREIGN KEY (guest_id) REFERENCES guests(guest_id),
-    FOREIGN KEY (room_id) REFERENCES rooms(room_id)
-);
+### 👤 Guest Management
+- Add new guests with name, phone number, and email
+- View guest records
+- Update guest information
+- Delete guest entries
 
+### 🏠 Room Management
+- Add new rooms with number, type, price, and status
+- View all rooms
+- Update room details
+- Delete rooms
+
+### 📅 Booking Management
+- Create bookings linking guests with rooms
+- Set check-in and check-out dates
+- View all bookings
+
+---
+
+## 🛠️ Technologies Used
+
+- **Java** (JDK 8+)
+- **JDBC** (Java Database Connectivity)
+- **MySQL** (8.0+ recommended)
+- **Command Line Interface** (CLI-based interaction)
+
+---
+
+## 🗂️ Project Structure
+HotelManagementSystem/
+│
+├── src/
+│ ├── Main.java
+│ ├── DatabaseConnection.java
+│ ├── GuestManager.java
+│ ├── RoomManager.java
+│ └── BookingManager.java
+│
+├── sql/
+│ └── schema.sql # SQL script to create required tables
+│
+└── README.md
+
+
+
+**How to Setup**
+1. Download and Install MySQL server and workbench
+2. Download and Install Intellij Idea
+3. Download and Open the project or fork into your repository and clone it into your local repository
+4. Download mysql connector j jar and import in the project as a external libraries
+5. Create database and tables as given in readme
+6. Connect the database with code just change url,username and password in DbConnection file
+7. You are good to go...
+
+**SQL Queries**
+
+Database Name : hotel_management_system
+
+***Guest Table***
+
+Table Name : guests
++----------+--------------+------+-----+---------+----------------+
+| Field    | Type         | Null | Key | Default | Extra          |
++----------+--------------+------+-----+---------+----------------+
+| guest_id | int          | NO   | PRI | NULL    | auto_increment |
+| name     | varchar(100) | YES  |     | NULL    |                |
+| phone    | varchar(15)  | YES  |     | NULL    |                |
+| email    | varchar(20)  | YES  |     | NULL    |                |
++----------+--------------+------+-----+---------+----------------+
+
+
+***Room Table***
+
+Table Name : rooms
++-------------+---------------+------+-----+---------+----------------+
+| Field       | Type          | Null | Key | Default | Extra          |
++-------------+---------------+------+-----+---------+----------------+
+| room_id     | int           | NO   | PRI | NULL    | auto_increment |
+| room_number | int           | YES  |     | NULL    |                |
+| room_type   | varchar(50)   | YES  |     | NULL    |                |
+| price       | decimal(10,2) | YES  |     | NULL    |                |
+| status      | varchar(15)   | YES  |     | NULL    |                |
++-------------+---------------+------+-----+---------+----------------+
+
+
+***Bookings Table***
+
+Table Name : bookings
++---------------+------------+------+-----+---------+----------------+
+| Field         | Type       | Null | Key | Default | Extra          |
++---------------+------------+------+-----+---------+----------------+
+| booking_id    | int        | NO   | PRI | NULL    | auto_increment |
+| guest_id      | int        | YES  | MUL | NULL    |                |
+| room_id       | int        | YES  | MUL | NULL    |                |
+| checkin_date  | date       | YES  |     | NULL    |                |
+| checkout_date | date       | YES  |     | NULL    |                |
++---------------+------------+------+-----+---------+----------------+
+
+
+#Note : Its not optimal now missing some egde cases soon resolve it...
