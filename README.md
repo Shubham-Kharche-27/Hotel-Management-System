@@ -34,23 +34,6 @@ A **Command-Line Hotel Management System** built using **Java**, connected to a 
 
 ---
 
-## 🗂️ Project Structure
-HotelManagementSystem/
-│
-├── src/
-│ ├── Main.java
-│ ├── DatabaseConnection.java
-│ ├── GuestManager.java
-│ ├── RoomManager.java
-│ └── BookingManager.java
-│
-├── sql/
-│ └── schema.sql # SQL script to create required tables
-│
-└── README.md
-
-
-
 **How to Setup**
 1. Download and Install MySQL server and workbench
 2. Download and Install Intellij Idea
@@ -60,6 +43,8 @@ HotelManagementSystem/
 6. Connect the database with code just change url,username and password in DbConnection file
 7. You are good to go...
 
+---
+
 **SQL Queries**
 
 Database Name : hotel_management_system
@@ -67,42 +52,42 @@ Database Name : hotel_management_system
 ***Guest Table***
 
 Table Name : guests
-+----------+--------------+------+-----+---------+----------------+
-| Field    | Type         | Null | Key | Default | Extra          |
-+----------+--------------+------+-----+---------+----------------+
-| guest_id | int          | NO   | PRI | NULL    | auto_increment |
-| name     | varchar(100) | YES  |     | NULL    |                |
-| phone    | varchar(15)  | YES  |     | NULL    |                |
-| email    | varchar(20)  | YES  |     | NULL    |                |
-+----------+--------------+------+-----+---------+----------------+
+
+| Field     | Type         | Null | Key | Default | Extra           |
+| --------- | ------------ | ---- | --- | ------- | --------------- |
+| guest\_id | int          | NO   | PRI | NULL    | auto\_increment |
+| name      | varchar(100) | YES  |     | NULL    |                 |
+| phone     | varchar(15)  | YES  |     | NULL    |                 |
+| email     | varchar(20)  | YES  |     | NULL    |                 |
+
 
 
 ***Room Table***
 
-Table Name : rooms
-+-------------+---------------+------+-----+---------+----------------+
-| Field       | Type          | Null | Key | Default | Extra          |
-+-------------+---------------+------+-----+---------+----------------+
-| room_id     | int           | NO   | PRI | NULL    | auto_increment |
-| room_number | int           | YES  |     | NULL    |                |
-| room_type   | varchar(50)   | YES  |     | NULL    |                |
-| price       | decimal(10,2) | YES  |     | NULL    |                |
-| status      | varchar(15)   | YES  |     | NULL    |                |
-+-------------+---------------+------+-----+---------+----------------+
+Table Name : guests
+
+| Field        | Type          | Null | Key | Default | Extra           |
+| ------------ | ------------- | ---- | --- | ------- | --------------- |
+| room\_id     | int           | NO   | PRI | NULL    | auto\_increment |
+| room\_number | int           | YES  |     | NULL    |                 |
+| room\_type   | varchar(50)   | YES  |     | NULL    |                 |
+| price        | decimal(10,2) | YES  |     | NULL    |                 |
+| status       | varchar(15)   | YES  |     | NULL    |                 |
+
 
 
 ***Bookings Table***
 
 Table Name : bookings
-+---------------+------------+------+-----+---------+----------------+
-| Field         | Type       | Null | Key | Default | Extra          |
-+---------------+------------+------+-----+---------+----------------+
-| booking_id    | int        | NO   | PRI | NULL    | auto_increment |
-| guest_id      | int        | YES  | MUL | NULL    |                |
-| room_id       | int        | YES  | MUL | NULL    |                |
-| checkin_date  | date       | YES  |     | NULL    |                |
-| checkout_date | date       | YES  |     | NULL    |                |
-+---------------+------------+------+-----+---------+----------------+
+
+| Field          | Type | Null | Key | Default | Extra           |
+| -------------- | ---- | ---- | --- | ------- | --------------- |
+| booking\_id    | int  | NO   | PRI | NULL    | auto\_increment |
+| guest\_id      | int  | YES  | MUL | NULL    |                 |
+| room\_id       | int  | YES  | MUL | NULL    |                 |
+| checkin\_date  | date | YES  |     | NULL    |                 |
+| checkout\_date | date | YES  |     | NULL    |                 |
+
 
 
 #Note : Its not optimal now missing some egde cases soon resolve it...
